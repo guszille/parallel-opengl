@@ -1,12 +1,16 @@
 #pragma once
 
+#include <iostream>
+
 #include <glad/glad.h>
 
 class VBO
 {
 public:
-	VBO(const void* vertices, const int size);
+	VBO();
+	VBO(const float* vertices, int size);
 
+	void Fill(const float* vertices, int size);
 	void Bind();
 	void Unbind();
 

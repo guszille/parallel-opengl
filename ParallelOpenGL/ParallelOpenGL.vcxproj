@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\utils\Debug.cpp" />
     <ClCompile Include="external\sources\glad\glad.c" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="sources\graphics\EBO.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="sources\threading\ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="sources\utils\Debug.h" />
     <ClInclude Include="sources\graphics\EBO.h" />
     <ClInclude Include="sources\graphics\ShaderProgram.h" />
     <ClInclude Include="sources\graphics\VAO.h" />

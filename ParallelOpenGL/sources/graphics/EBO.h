@@ -1,12 +1,16 @@
 #pragma once
 
+#include <iostream>
+
 #include <glad/glad.h>
 
 class EBO
 {
 public:
-	EBO(const unsigned int* indices, const int size);
+	EBO();
+	EBO(const unsigned int* indices, int size);
 
+	void Fill(const unsigned int* indices, int size);
 	void Bind();
 	void Unbind();
 

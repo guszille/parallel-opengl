@@ -3,6 +3,8 @@
 VAO::VAO() : m_ID()
 {
 	glGenVertexArrays(1, &m_ID);
+
+	std::cout << "VAO() [ID: " << m_ID << "]\n";
 }
 
 void VAO::Bind()
