@@ -21,25 +21,20 @@ const int WINDOW_HEIGHT = 600;
 GLFWwindow* g_PrimaryGLContext;
 GLFWwindow* g_SecondaryGLContext;
 
+GLsync g_GLFenceSync;
+
 ShaderProgram* g_QuadSP;
 VAO* g_QuadVAO;
 VBO* g_QuadVBO;
 EBO* g_QuadEBO;
 
-GLsync g_GLFenceSync;
-
 float g_QuadVertices[] = {
-	 0.5f,  0.5f,  0.0f,  // top right
-	 0.5f, -0.5f,  0.0f,  // bottom right
-	-0.5f, -0.5f,  0.0f,  // bottom left
-	-0.5f,  0.5f,  0.0f   // top left
+	 0.5f,  0.5f,  0.0f,  // TOP RIGHT
+	 0.5f, -0.5f,  0.0f,  // BOTTOM RIGHT
+	-0.5f, -0.5f,  0.0f,  // BOTTOM LEFT
+	-0.5f,  0.5f,  0.0f   // TOP LEFT
 };
-
-unsigned int g_QuadIndices[] = {
-	0, 1, 3,  // first triangle
-	1, 2, 3   // second triangle
-};
-
+unsigned int g_QuadIndices[] = { 0, 1, 3, 1, 2, 3 };
 bool g_IsQuadReady = false;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -75,6 +70,8 @@ void setup_quad_data_callback()
 {
 	std::cout << "setup_quad_data_callback()::begin\n";
 
+	glWaitSync(g_GLFenceSync, 0, GL_TIMEOUT_IGNORED); // It's also a good practice delete the used sync object, by calling "glDeleteSync(g_GLFenceSync);".
+
 	g_QuadVAO->Bind();
 	g_QuadVBO->Bind();
 	g_QuadEBO->Bind();
@@ -84,9 +81,6 @@ void setup_quad_data_callback()
 	g_QuadVAO->Unbind();
 	g_QuadVBO->Unbind();
 	g_QuadEBO->Unbind();
-
-	glWaitSync(g_GLFenceSync, 0, GL_TIMEOUT_IGNORED);
-	glDeleteSync(g_GLFenceSync);
 
 	g_IsQuadReady = true;
 
